@@ -29,6 +29,10 @@ The current preview uses the Worker named `nps-hub` at https://hub-preview.nicks
 
 ## Deployment status
 
-Source was published to GitHub on November 12, 2026. Deployment currently uses the Cloudflare API. GitHub push-to-deploy has not been configured.
+Source was published to GitHub on November 12, 2026. Deployment uses the Cloudflare API. Run `node scripts/deploy.mjs` with Node.js 22 or newer, `CLOUDFLARE_ACCOUNT_ID`, and a scoped `CLOUDFLARE_API_TOKEN`. The script preserves the existing password secret bindings.
+
+Cloudflare Builds can use `node --check worker.mjs` as the build command and `node scripts/deploy.mjs` as the deploy command, with repository root `/` and branch `main`. Automatic GitHub deployment remains pending because approval review blocked access to the account’s build credential references.
+
+The generated owner password was not installed because approval review requires explicit approval for the credential replacement. The existing preview credentials remain active.
 
 Admin and viewer login, remembered sessions, role visibility, logout, and admin session revocation passed live HTTP checks using temporary test credentials. Permanent credentials and an owner browser login remain pending before production cutover.
