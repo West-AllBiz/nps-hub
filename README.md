@@ -25,14 +25,14 @@ Required bindings are listed below.
 
 Configure secrets directly in Cloudflare. Enable Worker logs and traces. The repository contains no credentials.
 
-The current preview uses the Worker named `nps-hub` at https://hub-preview.nickspianoservices.com/. The production domain still serves the older hub.
+The current preview uses the Worker named `nps-hub` at https://hub-preview.nickspianoservices.com/. The main domain https://hub.nickspianoservices.com/ was assigned to this Worker on November 13, 2026. DNS caches may temporarily serve the previous site.
 
 ## Deployment status
 
 Source was published to GitHub on November 12, 2026. Deployment uses the Cloudflare API. Run `node scripts/deploy.mjs` with Node.js 22 or newer, `CLOUDFLARE_ACCOUNT_ID`, and a scoped `CLOUDFLARE_API_TOKEN`. The script preserves the existing password secret bindings.
 
-Cloudflare Builds can use `node --check worker.mjs` as the build command and `node scripts/deploy.mjs` as the deploy command, with repository root `/` and branch `main`. Automatic GitHub deployment remains pending because approval review blocked access to the account’s build credential references.
+Cloudflare Builds can use `node --check worker.mjs` as the build command and `node scripts/deploy.mjs` as the deploy command, with repository root `/` and branch `main`. Automatic GitHub deployment remains pending. After authorization, the build-token list was empty and the repository connection API returned HTTP 500 on two attempts. Direct API deployment is available.
 
-The generated owner password was not installed because approval review requires explicit approval for the credential replacement. The existing preview credentials remain active.
+The owner password was replaced with explicit approval on November 13, 2026 and verified on the preview. The value is held in a Cloudflare secret and supplied privately to the owner.
 
-Admin and viewer login, remembered sessions, role visibility, logout, and admin session revocation passed live HTTP checks using temporary test credentials. Permanent credentials and an owner browser login remain pending before production cutover.
+Admin and viewer login, remembered sessions, role visibility, logout, and admin session revocation passed live HTTP checks using temporary test credentials. The permanent owner password and 30-day session cookie were verified through live HTTP requests on the preview on November 13. The main-domain route is configured. End-to-end checks through the current network still encounter cached DNS for the former host.
